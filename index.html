@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Protocole 34 - Euro Analyse</title>
+  <meta name="description" content="Application personnelle d'analyse Euromillions avec génération de grilles optimisées, statistiques et historique local." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Assistant personnel Euromillions</p>
+        <h1>Protocole 34</h1>
+      </div>
+      <div class="badge">LOCAL</div>
+    </header>
+
+    <section class="hero">
+      <div>
+        <p class="hero-label">Mode personnel</p>
+        <h2 id="modeTitle">Analyse + Simulation</h2>
+        <p class="hero-text">
+          Génère des grilles optimisées avec score, historique, retard, équilibre et filtre anti-grilles humaines.
+        </p>
+      </div>
+    </section>
+
+    <nav class="tabs">
+      <button class="tab active" data-view="generateView">Générer</button>
+      <button class="tab" data-view="statsView">Stats</button>
+      <button class="tab" data-view="historyView">Tirages</button>
+      <button class="tab" data-view="importView">Import</button>
+    </nav>
+
+    <main>
+      <section id="generateView" class="view active">
+        <div class="card">
+          <h3>Générateur intelligent</h3>
+
+          <label class="field">
+            Nombre de grilles
+            <select id="gridCount">
+              <option value="1">1 grille</option>
+              <option value="3" selected>3 grilles</option>
+              <option value="5">5 grilles</option>
+              <option value="10">10 grilles</option>
+            </select>
+          </label>
+
+          <label class="switch-line">
+            <span>
+              Mode Protocole 34
+              <small>Force le numéro 34 et l’étoile 4</small>
+            </span>
+            <input type="checkbox" id="protocolMode" checked />
+          </label>
+
+          <label class="field">
+            Style de génération
+            <select id="strategy">
+              <option value="balanced" selected>Équilibré</option>
+              <option value="rare">Grille rare</option>
+              <option value="aggressive">Agressif</option>
+              <option value="humanSafe">Anti-grille humaine</option>
+            </select>
+          </label>
+
+          <button id="generateBtn" class="main-btn">Générer mes grilles</button>
+        </div>
+
+        <div id="results" class="results"></div>
+      </section>
+
+      <section id="statsView" class="view">
+        <div class="card">
+          <h3>Statistiques</h3>
+          <p class="muted">Les statistiques utilisent les tirages enregistrés dans ton téléphone.</p>
+        </div>
+
+        <div class="stats-grid">
+          <div class="card mini">
+            <h4>Numéros chauds</h4>
+            <div id="hotNumbers" class="pill-list"></div>
+          </div>
+
+          <div class="card mini">
+            <h4>Numéros froids</h4>
+            <div id="coldNumbers" class="pill-list"></div>
+          </div>
+
+          <div class="card mini">
+            <h4>Plus gros retards</h4>
+            <div id="lateNumbers" class="pill-list"></div>
+          </div>
+
+          <div class="card mini">
+            <h4>Étoiles chaudes</h4>
+            <div id="hotStars" class="pill-list stars"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="historyView" class="view">
+        <div class="card">
+          <h3>Ajouter un tirage</h3>
+
+          <label class="field">
+            Date du tirage
+            <input id="drawDate" type="date" />
+          </label>
+
+          <label class="field">
+            5 numéros
+            <input id="drawNumbers" type="text" placeholder="Ex : 4 12 23 34 48" />
+          </label>
+
+          <label class="field">
+            2 étoiles
+            <input id="drawStars" type="text" placeholder="Ex : 4 9" />
+          </label>
+
+          <button id="addDrawBtn" class="main-btn">Ajouter le tirage</button>
+          <button id="clearHistoryBtn" class="danger-btn">Effacer tout l’historique</button>
+        </div>
+
+        <div class="card">
+          <h3>Historique enregistré</h3>
+          <p id="historyCount" class="muted"></p>
+          <div id="historyList" class="history-list"></div>
+        </div>
+      </section>
+
+      <section id="importView" class="view">
+        <div class="card">
+          <h3>Import rapide</h3>
+          <p class="muted">Colle tes tirages ligne par ligne.</p>
+
+          <div class="example">
+            Exemple :<br />
+            2026-05-03 | 4 12 23 34 48 | 4 9<br />
+            2026-04-30 | 1 8 19 27 44 | 2 11
+          </div>
+
+          <textarea id="importText" rows="8" placeholder="Colle ici tes tirages..."></textarea>
+          <button id="importBtn" class="main-btn">Importer les tirages</button>
+        </div>
+
+        <div class="card">
+          <h3>Conseil</h3>
+          <p class="muted">
+            Plus tu ajoutes d’anciens tirages, plus les statistiques deviennent utiles. L’idéal sera d’ajouter progressivement 100 à 500 tirages.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>Application personnelle. Analyse statistique uniquement. Aucun résultat garanti.</p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
